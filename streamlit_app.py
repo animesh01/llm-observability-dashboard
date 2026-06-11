@@ -17,7 +17,15 @@ from pathlib import Path
 
 import streamlit as st
 
-from scripts.report_builders import exec_summary_text, build_pdf, build_pptx
+try:
+    from scripts.report_builders import exec_summary_text, build_pdf, build_pptx
+except ModuleNotFoundError as _e:
+    import streamlit as _st
+    _st.error(
+        "Could not import report builders. This usually means the `scripts/` folder "
+        "didn't get pushed, or the app isn't at the repo root. The root must contain "
+        "`streamlit_app.py`, `scripts/`, and `data/` side by side. (" + str(_e) + ")")
+    _st.stop()
 
 ROOT = Path(__file__).resolve().parent
 DB = ROOT / "data" / "telemetry.db"

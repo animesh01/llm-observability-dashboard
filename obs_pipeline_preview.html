@@ -1,0 +1,117 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body class="stApp" style="padding:30px"><style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap');
+        .stApp { background:
+            radial-gradient(1200px 500px at 18% -8%, #f4f4fb 0%, rgba(244,244,251,0) 60%),
+            linear-gradient(180deg, #eaeaf3 0%, #e2e2ee 100%); }
+        html, body, [class*="css"] { font-family:"DM Sans",sans-serif; color:#1a1f2e; }
+        h1,h2,h3,h4 { font-family:"Manrope",sans-serif !important; letter-spacing:-0.025em; color:#1a1f2e !important; }
+        .stCaption, [data-testid="stCaptionContainer"] { color:#6f7689 !important; }
+        .hero { position:relative; overflow:hidden; border-radius:24px; padding:32px 36px; margin-bottom:18px; color:#fff;
+            background:linear-gradient(135deg,#3a44a8 0%,#4f5bd5 52%,#7b84ec 100%);
+            box-shadow:0 2px 2px rgba(30,28,80,.10), 0 16px 32px -10px rgba(60,55,170,.4), 0 44px 70px -24px rgba(60,55,170,.42); }
+        .hero::before { content:""; position:absolute; inset:0 0 auto 0; height:1px; border-radius:24px 24px 0 0;
+            background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent); }
+        .hero h1, .hero h1 * { color:#fff !important; -webkit-text-fill-color:#fff !important; font-size:2.05rem; margin:8px 0 8px; }
+        .hero p { color:#eceafb !important; font-size:1.0rem; line-height:1.5; max-width:74%; margin:0; }
+        .hero p b { color:#fff !important; }
+        .hero .pill { display:inline-block; padding:6px 14px; border-radius:999px;
+            background:rgba(255,255,255,0.22); color:#fff !important; font-size:0.72rem; font-weight:700;
+            letter-spacing:0.06em; text-transform:uppercase; box-shadow:inset 0 1px 0 rgba(255,255,255,.3); }
+        .hero-art { position:absolute; right:28px; top:22px; opacity:0.96; filter:drop-shadow(0 12px 18px rgba(30,28,80,.3)); }
+        .status-row { display:flex; gap:13px; margin-top:20px; flex-wrap:wrap; }
+        .status { background:rgba(255,255,255,0.15); border-radius:13px; padding:10px 16px; box-shadow:inset 0 1px 0 rgba(255,255,255,.18); }
+        .status .n { font-size:1.3rem; font-weight:800; font-family:Manrope; color:#fff; }
+        .status .l { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.05em; opacity:0.9; color:#fff; }
+        .section-title { font-family:Manrope; font-weight:800; font-size:1.28rem; margin:12px 0 2px; letter-spacing:-0.015em; }
+        .section-copy { color:#6f7689; font-size:0.96rem; margin-bottom:14px; max-width:820px; line-height:1.5; }
+        .kpi-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+        .kpi-grid.three { grid-template-columns:repeat(3,1fr); }
+        .kpi { position:relative; background:linear-gradient(180deg,#fff,#fafaff); border:1px solid #e7e7f1;
+            border-radius:18px; padding:17px 19px;
+            box-shadow:0 1px 1px rgba(30,28,80,.04), 0 6px 12px -3px rgba(30,28,80,.10), 0 20px 34px -12px rgba(30,28,80,.16);
+            transition:transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s; }
+        .kpi::before { content:""; position:absolute; inset:0 0 auto 0; height:1px; border-radius:18px 18px 0 0;
+            background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent); }
+        .kpi:hover { transform:translateY(-4px);
+            box-shadow:0 2px 2px rgba(30,28,80,.05), 0 10px 18px -4px rgba(30,28,80,.16), 0 28px 46px -16px rgba(30,28,80,.24); }
+        .kpi .lbl { font-size:0.72rem; font-weight:700; color:#6f7689; text-transform:uppercase; letter-spacing:0.04em; }
+        .kpi .val { font-family:Manrope; font-weight:800; font-size:1.7rem; line-height:1.05; margin:8px 0 4px; letter-spacing:-0.03em; }
+        .kpi .val .u { font-size:0.9rem; color:#6f7689; font-weight:700; }
+        .kpi .delta { font-size:0.78rem; font-weight:700; }
+        .kpi .def { font-size:0.74rem; color:#9aa0b0; line-height:1.4; margin-top:3px; }
+        .up-good { color:#22b892; } .up-bad { color:#e8654f; } .flat { color:#6f7689; }
+        .panel { position:relative; background:linear-gradient(180deg,#fff,#fafaff); border:1px solid #e7e7f1;
+            border-radius:20px; padding:22px 24px; margin-top:14px;
+            box-shadow:0 1px 1px rgba(30,28,80,.04), 0 6px 12px -3px rgba(30,28,80,.10), 0 20px 34px -12px rgba(30,28,80,.16); }
+        .panel::before { content:""; position:absolute; inset:0 0 auto 0; height:1px; border-radius:20px 20px 0 0;
+            background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent); }
+        .bucket-verdict { display:flex; align-items:center; gap:12px; margin:6px 0 14px; }
+        .bucket-verdict .chip { font-weight:800; font-size:0.8rem; padding:5px 13px; border-radius:10px; box-shadow:inset 0 1px 0 #fff; }
+        .bucket-verdict .txt { color:#6f7689; font-size:0.95rem; }
+        .takeaway { background:linear-gradient(180deg,#fff,#fafaff); border:1px solid #e7e7f1;
+            border-left:3px solid #4f5bd5; border-radius:14px; padding:14px 18px; font-size:0.95rem;
+            line-height:1.5; margin:12px 0 4px; color:#565d6c;
+            box-shadow:0 1px 1px rgba(30,28,80,.04), 0 6px 12px -3px rgba(30,28,80,.10); }
+        .takeaway b { font-family:Manrope; color:#1a1f2e; }
+        .exec-card { position:relative; overflow:hidden; background:linear-gradient(180deg,#fff,#fafaff); border:1px solid #e7e7f1;
+            border-radius:22px; padding:24px 28px; margin-bottom:6px;
+            box-shadow:0 2px 2px rgba(30,28,80,.05), 0 14px 28px -8px rgba(30,28,80,.18), 0 40px 64px -22px rgba(30,28,80,.28); }
+        .exec-card::before { content:""; position:absolute; inset:0 0 auto 0; height:3px; background:#4f5bd5; border-radius:22px 22px 0 0; }
+        .exec-card h2 { font-size:1.3rem; margin:0 0 4px; }
+        .exec-card .lead { font-size:1.02rem; line-height:1.55; color:#454b5c; margin:6px 0 14px; }
+        .exec-card ul { margin:6px 0 0; padding-left:20px; }
+        .exec-card li { margin:5px 0; line-height:1.5; color:#565d6c; }
+        .alert { display:flex; gap:14px; align-items:flex-start; border-radius:14px; padding:15px 18px; margin-bottom:10px;
+            border:1px solid #e7e7f1; background:#fff; box-shadow:0 6px 14px -10px rgba(30,28,80,.3); }
+        .alert .dot { width:12px; height:12px; border-radius:50%; margin-top:5px; flex-shrink:0; }
+        .alert.critical { border-left:4px solid #e8654f; } .alert.critical .dot { background:#e8654f; }
+        .alert.warning { border-left:4px solid #dd9421; } .alert.warning .dot { background:#dd9421; }
+        .alert.info { border-left:4px solid #4f5bd5; } .alert.info .dot { background:#4f5bd5; }
+        .alert .body { flex:1; }
+        .alert .head { font-weight:800; font-family:Manrope; font-size:0.98rem; }
+        .alert .sev { font-size:0.66rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; padding:2px 9px; border-radius:7px; margin-left:8px; }
+        .alert.critical .sev { background:#fbe9e6; color:#c1422c; }
+        .alert.warning .sev { background:#fbf1dc; color:#9a6a14; }
+        .alert.info .sev { background:#eef0fb; color:#3f49b8; }
+        .alert .detail { color:#6f7689; font-size:0.88rem; margin-top:3px; line-height:1.45; }
+        .alert .where { color:#5b6479; font-size:0.78rem; margin-top:4px; font-weight:600; }
+        table.tbl { width:100%; border-collapse:collapse; font-size:0.88rem; }
+        table.tbl th { text-align:left; padding:9px 11px; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.03em; color:#6f7689; border-bottom:1px solid #e7e7f1; background:#eef0fb; }
+        table.tbl td { padding:9px 11px; border-bottom:1px solid #e7e7f1; color:#1a1f2e; }
+        .hbar { height:8px; border-radius:99px; background:#eceaf6; overflow:hidden; min-width:60px; }
+        .hbar > span { display:block; height:100%; border-radius:99px; }
+        .badge { display:inline-block; padding:2px 9px; border-radius:7px; font-weight:700; font-size:0.8rem; box-shadow:inset 0 1px 0 #fff; }
+        .stTabs [data-baseweb="tab-list"] { gap:9px; border-bottom:none !important; padding:4px 0 6px; flex-wrap:wrap; }
+        .stTabs [data-baseweb="tab"] { background:#fff !important; color:#6f7689 !important; border:1px solid #e7e7f1 !important;
+            border-radius:999px !important; padding:8px 16px !important; height:auto !important;
+            box-shadow:0 4px 10px -6px rgba(30,28,80,.25), inset 0 1px 0 #fff !important;
+            transition:transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s, background .25s !important; }
+        .stTabs [data-baseweb="tab"] * { color:#6f7689 !important; }
+        .stTabs [data-baseweb="tab"]:hover { transform:translateY(-2px) !important; box-shadow:0 8px 16px -8px rgba(30,28,80,.3) !important; }
+        .stTabs [data-baseweb="tab"][aria-selected="true"] { background:#eef0fb !important; border-color:#d6d4f3 !important; transform:translateY(-3px) !important;
+            box-shadow:0 10px 20px -8px rgba(79,91,213,.4), inset 0 1px 0 #fff !important; }
+        .stTabs [data-baseweb="tab"][aria-selected="true"] * { color:#3f49b8 !important; font-weight:700 !important; }
+        .stTabs [data-baseweb="tab-highlight"], .stTabs [data-baseweb="tab-border"] { display:none !important; background:transparent !important; }
+        [data-testid="stExpander"] { border:1px solid #e7e7f1 !important; border-radius:14px; background:#fff; box-shadow:0 6px 14px -10px rgba(30,28,80,.3); overflow:hidden; }
+        [data-testid="stExpander"] details > summary, [data-testid="stExpander"] summary { background:#eef0fb !important; border-bottom:1px solid #e2e0f6 !important; }
+        [data-testid="stExpander"] summary, [data-testid="stExpander"] summary *,
+        [data-testid="stExpander"] [class*="Header"], [data-testid="stExpander"] [class*="Header"] * { color:#1a1f2e !important; -webkit-text-fill-color:#1a1f2e !important; font-weight:700 !important; }
+        [data-testid="stExpander"] summary:hover * { color:#3f49b8 !important; -webkit-text-fill-color:#3f49b8 !important; }
+        [data-testid="stExpander"] [data-testid="stExpanderDetails"] { background:#fff !important; }
+        [data-testid="stExpander"] p, [data-testid="stExpander"] li { color:#1a1f2e !important; -webkit-text-fill-color:#1a1f2e !important; }
+        .stButton button { border-radius:12px !important; font-weight:700 !important; border:1px solid #e7e7f1 !important;
+            background:#fff !important; color:#3f49b8 !important; box-shadow:0 4px 12px -6px rgba(30,28,80,.3) !important; }
+        .stButton button:hover { transform:translateY(-1px); border-color:#d6d4f3 !important; }
+        .stDownloadButton button { border-radius:12px !important; font-weight:700 !important; border:none !important;
+            background:linear-gradient(180deg,#4f5bd5,#3f49b8) !important; color:#fff !important;
+            box-shadow:0 8px 18px -6px rgba(79,91,213,.5), inset 0 1px 0 rgba(255,255,255,.2) !important; }
+        .stDownloadButton button:hover { filter:brightness(1.07); transform:translateY(-1px); }
+        </style>
+<div class="section-title">How the data flows, end to end</div>
+<div class="section-copy">This dashboard is backed by a real SQLite database, not a flat file. Raw conversation events are stored, then rolled up with SQL into the daily metrics and per-bucket summaries.</div>
+<div style='display:flex;gap:10px;flex-wrap:wrap'><div class='panel' style='flex:1;min-width:180px;margin-top:0'><div style='font-size:0.72rem;font-weight:800;color:#4f5bd5;text-transform:uppercase;letter-spacing:0.05em'>1 . Ingest</div><div style='font-weight:800;font-family:Manrope;margin:4px 0 6px'>Conversation events</div><div style='color:#6f7689;font-size:0.84rem;line-height:1.4'>Each conversation emits a row: intent correct?, resolved?, hallucinated?, latency, cost, CSAT.</div></div><div class='panel' style='flex:1;min-width:180px;margin-top:0'><div style='font-size:0.72rem;font-weight:800;color:#4f5bd5;text-transform:uppercase;letter-spacing:0.05em'>2 . Store</div><div style='font-weight:800;font-family:Manrope;margin:4px 0 6px'>SQLite warehouse</div><div style='color:#6f7689;font-size:0.84rem;line-height:1.4'>1,800 raw events land in conversation_events, indexed by day and domain.</div></div><div class='panel' style='flex:1;min-width:180px;margin-top:0'><div style='font-size:0.72rem;font-weight:800;color:#4f5bd5;text-transform:uppercase;letter-spacing:0.05em'>3 . Aggregate</div><div style='font-weight:800;font-family:Manrope;margin:4px 0 6px'>SQL rollups</div><div style='color:#6f7689;font-size:0.84rem;line-height:1.4'>GROUP BY queries roll raw events into daily metrics, domain health, failure shares.</div></div><div class='panel' style='flex:1;min-width:180px;margin-top:0'><div style='font-size:0.72rem;font-weight:800;color:#4f5bd5;text-transform:uppercase;letter-spacing:0.05em'>4 . Serve</div><div style='font-weight:800;font-family:Manrope;margin:4px 0 6px'>Dashboard</div><div style='color:#6f7689;font-size:0.84rem;line-height:1.4'>The five buckets, by-domain, and failure views read these tables with SELECT.</div></div><div class='panel' style='flex:1;min-width:180px;margin-top:0'><div style='font-size:0.72rem;font-weight:800;color:#4f5bd5;text-transform:uppercase;letter-spacing:0.05em'>5 . Act</div><div style='font-weight:800;font-family:Manrope;margin:4px 0 6px'>Alerts & exports</div><div style='color:#6f7689;font-size:0.84rem;line-height:1.4'>Threshold queries raise alerts; the summary exports to PDF / PPTX.</div></div></div>
+<div class="section-title" style="margin-top:20px">Live SQL rollup from raw events</div>
+<div class="section-copy">Computed at request time straight from the raw conversation_events stream - proof the pipeline is real, not pre-baked.</div>
+<div class='panel' style='font-family:monospace;font-size:0.82rem;color:#1a1f2e;background:#f2f1fb'>SELECT domain,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COUNT(*) AS convos,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ROUND(AVG(intent_correct)*100,1) AS intent_acc,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ROUND(AVG(resolved)*100,1) AS resolved_pct<br>FROM conversation_events<br>GROUP BY domain ORDER BY intent_acc ASC;</div>
+<div class='panel'><table class='tbl'><thead><tr><th>Domain</th><th>Convos (sampled)</th><th>Intent acc.</th><th>Resolved</th><th>Halluc.</th><th>Avg latency</th></tr></thead><tbody><tr><td style='font-weight:700'>Account & payment</td><td>236</td><td><span class='badge' style='background:#dd942122;color:#dd9421'>91.5%</span></td><td>72.5%</td><td>3.39%</td><td>1,229 ms</td></tr><tr><td style='font-weight:700'>Pharmacy</td><td>242</td><td><span class='badge' style='background:#dd942122;color:#dd9421'>92.1%</span></td><td>71.5%</td><td>3.72%</td><td>1,272 ms</td></tr><tr><td style='font-weight:700'>Order tracking</td><td>260</td><td><span class='badge' style='background:#dd942122;color:#dd9421'>92.7%</span></td><td>73.5%</td><td>3.85%</td><td>1,200 ms</td></tr><tr><td style='font-weight:700'>Returns & refunds</td><td>260</td><td><span class='badge' style='background:#22b89222;color:#22b892'>93.1%</span></td><td>71.2%</td><td>1.54%</td><td>1,224 ms</td></tr><tr><td style='font-weight:700'>Store info</td><td>246</td><td><span class='badge' style='background:#22b89222;color:#22b892'>93.1%</span></td><td>69.9%</td><td>3.25%</td><td>1,263 ms</td></tr><tr><td style='font-weight:700'>Product search</td><td>298</td><td><span class='badge' style='background:#22b89222;color:#22b892'>93.3%</span></td><td>76.2%</td><td>3.36%</td><td>1,276 ms</td></tr><tr><td style='font-weight:700'>Substitutions</td><td>258</td><td><span class='badge' style='background:#22b89222;color:#22b892'>95.3%</span></td><td>69.0%</td><td>5.04%</td><td>1,243 ms</td></tr></tbody></table></div>
+</body></html>

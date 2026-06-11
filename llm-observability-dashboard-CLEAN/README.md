@@ -38,13 +38,14 @@ This is less about plotting numbers and more about the decisions behind them:
 
 ```bash
 pip install -r requirements.txt
-streamlit run streamlit_app.py
+streamlit run streamlit_app.py          # reads data/telemetry.db via SQL
 ```
 
-Regenerate the synthetic dataset (optional):
+Regenerate the data + database (optional - a pre-built DB is committed):
 
 ```bash
-python scripts/generate_telemetry.py
+python scripts/generate_telemetry.py    # synthetic telemetry -> JSON
+python scripts/build_database.py         # JSON -> SQLite (data/telemetry.db)
 ```
 
 ---
@@ -65,9 +66,11 @@ The Executive Summary tab has three working actions:
 
 ```
 streamlit_app.py                 # the dashboard (9 views)
-scripts/generate_telemetry.py    # synthetic telemetry generator
+scripts/generate_telemetry.py    # synthetic telemetry generator (-> JSON)
+scripts/build_database.py        # builds the SQLite warehouse (-> telemetry.db)
 scripts/report_builders.py       # PDF / PPTX / text export builders
-data/telemetry.json              # generated demo dataset (30 days · 7 domains · 30 metrics/day)
+data/telemetry.db                # SQLite database the app queries (7 tables)
+data/telemetry.json              # source data, for regenerating the DB
 .streamlit/config.toml           # light theme
 requirements.txt · runtime.txt
 ```
